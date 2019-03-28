@@ -1,5 +1,7 @@
 {
   "name": "pa1416",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

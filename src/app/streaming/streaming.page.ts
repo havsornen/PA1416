@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { isDevMode } from "@angular/core";
 
 @Component({
   selector: "app-streaming",
@@ -7,20 +6,39 @@ import { isDevMode } from "@angular/core";
   styleUrls: ["./streaming.page.scss"]
 })
 export class StreamingPage implements OnInit {
-  constructor() {}
+  vid = document.querySelector("video");
+  m_imageNr = 1000000;
+  x: boolean = false;
 
-  isApp(): boolean {
-    return (
-      !document.URL.startsWith("http") ||
-      document.URL.startsWith("http://localhost:8080") ||
-      isDevMode()
-    );
-  }
+  constructor() {}
 
   ngOnInit() {
     const vid = document.querySelector("video");
+
+    console.log(
+      navigator.mediaDevices.getUserMedia({
+        video: {
+          width: { min: 1280 },
+          height: { min: 720 }
+        }
+      })
+    );
     navigator.mediaDevices
-      .getUserMedia({ video: true })
+      .getUserMedia({
+        video: {
+          width: {
+            min: 1280,
+            ideal: 1920,
+            max: 2560
+          },
+          height: {
+            min: 720,
+            ideal: 1080,
+            max: 1440
+          },
+          facingMode: "user"
+        }
+      })
       .then(stream => {
         vid.srcObject = stream;
         return vid.play();
@@ -29,9 +47,17 @@ export class StreamingPage implements OnInit {
         const btn = document.querySelector("button");
         btn.disabled = false;
         btn.onclick = e => {
-          takeASnap().then(toDataURL);
+          this.x = this.x == false ? true : false;
+          console.log(this.x);
+          var intervalId = setInterval(function() {
+            var timoutId = setTimeout(function() {
+              takeASnap().then(toDataURL);
+              console.log("weee");
+            }, 1000);
+          }, 1000);
         };
       });
+
     var m_imageNr = 1000000;
     function takeASnap() {
       const canvas = document.createElement("canvas");
@@ -43,13 +69,6 @@ export class StreamingPage implements OnInit {
         canvas.toBlob(res, "image/jpeg");
       });
     }
-    // function download(blob) {
-    //   let a = document.createElement("a");
-    //   a.href = URL.createObjectURL(blob);
-    //   a.download = "screenshot.jpg";
-    //   document.body.appendChild(a);
-    //   a.click();
-    // }
 
     function toDataURL(blob) {
       let reader = new FileReader();
@@ -57,16 +76,13 @@ export class StreamingPage implements OnInit {
       reader.onloadend = function() {
         let base64data = reader.result;
         var count = 0;
+        console.log(base64data);
         let b64 = chunkSubstr(base64data, 1000);
-        console.log(b64);
-
         webSocket(b64);
       };
     }
 
-    // Possible funktion for webbsocket.
-
-    function chunkSubstr(str, size) {
+    function chunkSubstr(str: any, size: any) {
       const numChunks = Math.ceil(str.length / size);
       const chunks = new Array(numChunks);
 
@@ -77,18 +93,20 @@ export class StreamingPage implements OnInit {
       return chunks;
     }
 
+    // Possible funktion for webbsocket.
+
     function webSocket(b64) {
-      var ws = new WebSocket("ws://193.11.184.212:3000");
+      var ws = new WebSocket("ws://192.168.0.5:3000");
       ws.onopen = function() {
-        console.log("Connected");
+        // console.log("Connected");
         b64.forEach(element => {
           ws.send(m_imageNr + " " + element);
-          console.log(element);
+          // console.log(element);
         });
         m_imageNr++;
 
         ws.onmessage = function(event) {
-          console.log("New message...", event);
+          // console.log("New message...", event);
         };
 
         //ws.close();

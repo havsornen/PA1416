@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +11,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPage implements OnInit {
 
-  constructor() { }
+  email: string;
+  password: string;
+  headers = {
+      'headers': new HttpHeaders({
+           'Content-Type': 'application/json'
+      })
+  };
+
+  constructor(private http: HttpClient, private router: Router) {}
+
 
   ngOnInit() {
   }
 
+  public login() {
+    const data = {
+            'email' : this.email,
+            'password' : this.password
+           };
+
+    const url = 'http://localhost:8080/SE_RESTApi_war_exploded/user/login';
+    this.http.post(url, data, this.headers)
+        .subscribe(
+            (response) => {
+                console.log('Logged in!');
+                this.router.navigate(['landingpage']);
+            },
+            error => {
+                console.log(error.error['response']);
+            });
+  }
 }

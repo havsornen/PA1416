@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,13 @@ export class LoginPage implements OnInit {
       })
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient,
+              private router: Router,
+              private us: UserServiceService) {
+      if (this.us.getUser()) {
+          this.router.navigate(['landingpage']);
+      }
+  }
 
 
   ngOnInit() {
@@ -36,6 +42,7 @@ export class LoginPage implements OnInit {
         .subscribe(
             (response) => {
                 console.log('Logged in!');
+                this.us.setUser(response);
                 this.router.navigate(['landingpage']);
             },
             error => {

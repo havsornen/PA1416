@@ -14,7 +14,14 @@ export class StreamingPage implements OnInit {
 
   ngOnInit() {
     const vid = document.querySelector("video");
+    const streamUsers = [];
+    // const image = document.createElement("img");
+    let eventChar = 0;
+    var ws = new WebSocket("ws://192.168.1.115:3000");
+    var string = "";
+    let imageA = document.getElementById("imageA") as HTMLImageElement;
 
+    // document.getElementById("window").append(image);
     console.log(
       navigator.mediaDevices.getUserMedia({
         video: {
@@ -27,14 +34,14 @@ export class StreamingPage implements OnInit {
       .getUserMedia({
         video: {
           width: {
-            min: 1280,
-            ideal: 1920,
-            max: 2560
+            min: 100,
+            ideal: 100,
+            max: 1280
           },
           height: {
-            min: 720,
-            ideal: 1080,
-            max: 1440
+            min: 100,
+            ideal: 100,
+            max: 100
           },
           facingMode: "user"
         }
@@ -52,9 +59,8 @@ export class StreamingPage implements OnInit {
           var intervalId = setInterval(function() {
             var timoutId = setTimeout(function() {
               takeASnap().then(toDataURL);
-              console.log("weee");
-            }, 1000);
-          }, 1000);
+            }, 150);
+          }, 150);
         };
       });
 
@@ -76,7 +82,6 @@ export class StreamingPage implements OnInit {
       reader.onloadend = function() {
         let base64data = reader.result;
         var count = 0;
-        console.log(base64data);
         let b64 = chunkSubstr(base64data, 1000);
         webSocket(b64);
       };
@@ -94,33 +99,65 @@ export class StreamingPage implements OnInit {
     }
 
     // Possible funktion for webbsocket.
-
     function webSocket(b64) {
-      var ws = new WebSocket("ws://192.168.0.5:3000");
-      ws.onopen = function() {
-        // console.log("Connected");
-        b64.forEach(element => {
-          ws.send(m_imageNr + " " + element);
-          // console.log(element);
-        });
-        m_imageNr++;
+      /*
+      We send base64 string to the websocket server. 
+      */
 
-        ws.onmessage = function(event) {
-          // console.log("New message...", event);
-        };
+      b64.forEach(element => {
+        ws.send(1 + " " + m_imageNr + " " + element);
+        // console.log(element);
+      });
+      m_imageNr++;
 
-        //ws.close();
+      console.log("NrOfImagesSent " + m_imageNr);
+      string = "";
+
+      /*  
+      Onmessage we get the message from the server and add it to a string. 
+      */
+      let eventImageNumber;
+      ws.onmessage = async function(event) {
+        eventImageNumber = event.data.substring(0, event.data.indexOf("_"));
+
+        if (eventImageNumber > eventChar) {
+          eventChar = eventImageNumber;
+
+          string = "";
+          // New message
+        }
+        let ipCheck = event.data.substring(
+          event.data.indexOf("_"),
+          event.data.indexOf(":")
+        );
+        console.log(ipCheck);
+
+        ipCheck = ipCheck.replace("_", "");
+        if (-1 == streamUsers.indexOf(ipCheck) && ipCheck != "") {
+          streamUsers.push(ipCheck);
+          streamUsers.forEach(user => {
+            let g = document.createElement("img");
+            g.setAttribute("id", user);
+            g.setAttribute("class", "imgId");
+
+            document.getElementById("window").appendChild(g);
+          });
+        }
+
+        // if (ipCheck != "193.11.187.234") {
+        if (event.data != "undefined" || event.data != undefined) {
+          // this line is to try to get the image number of event but not working.
+
+          string += event.data.substring(event.data.indexOf(";"));
+          string = string.replace(";", "");
+          string = string.replace(" ", ""); //
+          string = string.replace("data:image/jpegbase64", ""); //Needed if u wanna get base64 clean string
+
+          if (ipCheck != "") {
+            imageA.src = "data:image/jpeg;base64," + string;
+          }
+        }
       };
-      // .then(() => {
-      //   ws.onmessage = function() {
-      //     console.log("New message...");
-      //   };
-
-      //   b64.forEach(element => {
-      //     ws.send(element);
-      //   });
-      //   ws.close();
-      // });
     }
   }
 }

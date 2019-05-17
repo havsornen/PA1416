@@ -59,8 +59,8 @@ export class StreamingPage implements OnInit {
           var intervalId = setInterval(function() {
             var timoutId = setTimeout(function() {
               takeASnap().then(toDataURL);
-            }, 150);
-          }, 150);
+            }, 100);
+          }, 100);
         };
       });
 

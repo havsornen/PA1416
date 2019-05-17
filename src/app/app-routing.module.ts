@@ -1,16 +1,12 @@
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import {AuthGateService} from './auth-gate.service';
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", loadChildren: "./home/home.module#HomePageModule" },
-  {
-    path: "streaming",
-    loadChildren: "./streaming/streaming.module#StreamingPageModule"
-  },
-  {
-    path: "landingpage",
-    loadChildren: "./landingpage/landingpage.module#LandingpagePageModule"
-  }
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'streaming', loadChildren: './streaming/streaming.module#StreamingPageModule' },
+  { path: 'landingpage', loadChildren: './landingpage/landingpage.module#LandingpagePageModule', canActivate: [AuthGateService] },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
 ];
 
 @NgModule({

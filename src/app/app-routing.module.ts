@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'streaming', loadChildren: './streaming/streaming.module#StreamingPageModule' },
   { path: 'landingpage', loadChildren: './landingpage/landingpage.module#LandingpagePageModule', canActivate: [AuthGateService] },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'activity', loadChildren: './activity/activity.module#ActivityPageModule' },
 ];
 
 @NgModule({

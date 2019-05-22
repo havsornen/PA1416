@@ -11,22 +11,24 @@
         <div class="row">
             <div class="input">
                 <ion-item>
-                    <ion-input type="text" placeholder="Email"></ion-input>
+
+                    <ion-input [(ngModel)]="email_input" type="text" placeholder="Email"></ion-input>
                 </ion-item>
 
                 <ion-item>
-                    <ion-input type="text" placeholder="Förnamn"></ion-input>
+                    <ion-input [(ngModel)]="firstname_input" type="text" placeholder="Förnamn"></ion-input>
                 </ion-item>
 
                 <ion-item>
-                    <ion-input type="text" placeholder="Efternamn"></ion-input>
+                    <ion-input [(ngModel)]="lastname_input" type="text" placeholder="Efternamn"></ion-input>
                 </ion-item>
 
                 <ion-item>
-                    <ion-input type="password" placeholder="Password"></ion-input>
+                    <ion-input [(ngModel)]="password_input" type="password" placeholder="Password"></ion-input>
                 </ion-item>
 
-                <ion-button size="large" href="/touchid" expand="block">Login</ion-button>
+                <ion-button size="large" (click)="register()" expand="block">Registrera</ion-button>
+
 
             </div>
         </div>

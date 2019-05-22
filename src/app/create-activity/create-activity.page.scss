@@ -1,6 +1,7 @@
 .wrapper {
     width: 100%;
     background-color: #449BB5;
+    height: 100%;
     .header {
         width: 100%;
         height: 200px;
@@ -9,7 +10,7 @@
         flex-direction: row;
         .name {
             display: flex;
-            width: 50%;
+            width: 40%;
             height: 100%;
             justify-content: center;
             h1 {
@@ -21,11 +22,11 @@
         }
         .logo {
             display: flex;
-            width: 50%;
-            height: 111%;
+            width: 40%;
+            height: 100%;
             flex-direction: row-reverse;
             img {
-                width: 50%;
+                width: 40%;
                 margin-right: 100px;
             }
         }
@@ -34,20 +35,46 @@
         width: 100%;
         height: 400px;
         display: flex;
-        justify-content: center;
         flex-direction: column;
         color: white;
-        .name {
+        margin-top: 50px;
+        .input {
             display: flex;
-            justify-content: center;
-        }
-        .time {
-            display: flex;
-            justify-content: center;
-        }
-        .invites {
-            display: flex;
-            justify-content: center;
+            flex-direction: column;
+            .name {
+                margin: 0 auto;
+                width: 40%;
+                display: flex;
+                flex-direction: column;
+                ion-item{
+                    width: 100%;
+                }
+            }
+            .time {
+                width: 40%;
+                display: flex;
+                margin: 0 auto;
+                margin-top: 5px;
+                display: flex;
+                justify-content: space-between;
+                ion-item {
+                    width: 45%;
+                }
+            }
+            .invites {
+                width: 40%;
+                display: flex;
+                margin: 0 auto;
+                margin-top: 5px;
+                ion-item {
+                    width: 100%;
+                }
+            }
+            ion-button {
+                width: 40%;
+                margin: 0 auto;
+                margin-top: 50px;
+            }
         }
     }
 }

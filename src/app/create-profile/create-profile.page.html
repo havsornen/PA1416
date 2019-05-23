@@ -1,5 +1,6 @@
 <ion-content>
     <div class="wrapper">
+        <a href="landingpage">
         <div class="header">
             <div class="name">
                 <h1>Social Elderly</h1>
@@ -8,9 +9,11 @@
                 <img src="../../assets/1141066.svg" alt="Image error">
             </div>
         </div>
+        </a>
         <div class="row">
             <div class="input">
                 <ion-item>
+
                     <ion-input [(ngModel)]="email_input" type="text" placeholder="Email"></ion-input>
                 </ion-item>
 
@@ -27,6 +30,7 @@
                 </ion-item>
 
                 <ion-button size="large" (click)="register()" expand="block">Registrera</ion-button>
+
 
             </div>
         </div>

@@ -51,16 +51,28 @@ ion-content {
                 background-color: #68c39f;
                 margin-top: 50px;
                 border-radius: 50px;
-                h1 {
-                    margin-left: 45%;
+                .card-header {
+                    display: flex;
+                    justify-content: center;
+                    background-color: #49aa9b;
+                    border-top-left-radius: 50px;
+                    border-top-right-radius: 50px;
                 }
                 .content {
                     display: flex;
                     flex-direction: row;
+
+                    img {
+                        width: 35%;
+                        height: 100%;
+                    }
                 }
                 .time {
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: center;
+                    background-color: #49aa9b;
+                    border-bottom-left-radius: 50px;
+                    border-bottom-right-radius: 50px;
                     h2 {
 
                     }

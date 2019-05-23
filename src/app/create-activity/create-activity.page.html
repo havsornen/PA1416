@@ -12,34 +12,34 @@
             <div class="input">
                 <div class="name">
                     <ion-item>
-                        <ion-input type="text" placeholder="Title"></ion-input>
+                        <ion-input type="text" [(ngModel)]="activity_title" placeholder="Title"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-input type="text" placeholder="Description"></ion-input>
+                        <ion-input type="text" [(ngModel)]="activity_description" placeholder="Description"></ion-input>
                     </ion-item>
                 </div>
                 <div class="time">
                     <ion-item>
-                        <ion-input type="text" placeholder="startdatum"></ion-input>
+                        <ion-input type="text" [(ngModel)]="activity_startdate" placeholder="Start datum (HH:MM - DD/MM/YY)"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-input type="password" placeholder="slutdatum"></ion-input>
+                        <ion-input type="text" [(ngModel)]="activity_enddate" placeholder="Slut datum (HH:MM - DD/MM/YY)"></ion-input>
                     </ion-item>
                 </div>
                 <div class="invites">
                     <ion-item>
                         <ion-label>Inbjudningsform</ion-label>
-                        <ion-select placeholder="Select One">
-                            <ion-select-option value="f">Inbjudna enbart</ion-select-option>
-                            <ion-select-option value="m">Vänner enbart</ion-select-option>
-                            <ion-select-option value="m">Alla välkommna</ion-select-option>
+                        <ion-select placeholder="Select One" [(ngModel)]="activity_permission">
+                            <ion-select-option value="1">Inbjudna enbart</ion-select-option>
+                            <ion-select-option value="2">Vänner enbart</ion-select-option>
+                            <ion-select-option value="3">Alla välkommna</ion-select-option>
                         </ion-select>
                     </ion-item>
                 </div>
 
-                <ion-button size="large" href="/touchid" expand="block">Skapa aktivitet</ion-button>
+                <ion-button size="large" (click)="create_activity()" expand="block">Skapa aktivitet</ion-button>
 
             </div>
         </div>

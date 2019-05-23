@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-activity',
@@ -14,7 +15,7 @@ export class CreateActivityPage implements OnInit {
   activity_enddate = '';
   activity_permission = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -36,8 +37,19 @@ export class CreateActivityPage implements OnInit {
     this.http.post(URL, data)
         .subscribe((response) => {
           console.log(response);
+          this.presentAlert('Skapad!', 'Aktiviteten skapades och dina vänner är nu inbjudna!');
         }, error => {
           console.log(error);
+          this.presentAlert('Fel!', 'Aj då, nu gick något snett. Kolla så datumet är rätt!');
         });
+  }
+  async presentAlert(header: string, msg: string) {
+      const alert = await this.alertController.create({
+        header: header,
+        message: msg,
+        buttons: ['OK']
+      });
+
+      await alert.present();
   }
 }

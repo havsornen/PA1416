@@ -12,7 +12,7 @@
         </a>
         <div class="row">
             <div class="feed">
-                <div class="card">
+                <div class="card" *ngFor="let activity of activites">
                     <div class="card-header">
                         <h1>{{activity.activity_title}}</h1>
                     </div>
@@ -23,37 +23,15 @@
                     </div>
                     <br>
                     <h2>
-                        This is a description of a activity taking place at a lokation.
-                        It will be fun and people will be there so you sould be there too.
+                        {{activity.activity_desciption}}
                     </h2>
                     <br>
                     <br>
                     <hr>
                     <br>
                     <div class="info">
-                            <h3>18:00 22/05/19  till  20:00 22/05/19</h3>
-                            <h3>Alla Inbjudna</h3>
-                    </div>
-                </div>
-                <div class="card">
-                    <h1>Title</h1>
-                    <div class="content">
-                        <div class="frame">
-                            <img src="../../assets/Walking.svg" alt="walking icon">
-                        </div>
-                    </div>
-                    <br>
-                    <h2>
-                        This is a description of a activity taking place at a lokation.
-                        It will be fun little get together with friends.
-                    </h2>
-                    <br>
-                    <br>
-                    <hr>
-                    <br>
-                    <div class="info">
-                            <h3>14:00 23/05/19  till  20:00 23/05/19</h3>
-                            <h3>Vänner Inbjudna</h3>
+                            <h3>{{activity.activity_start}}  till  {{activity.activity_end}}</h3>
+                            <h3>{{activity.activity_permission}}</h3>
                     </div>
                 </div>
             </div>

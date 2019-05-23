@@ -1,3 +1,4 @@
+
 import { NgModule } from "@angular/core";
 import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
 import {AuthGateService} from './auth-gate.service';
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'activity', loadChildren: './activity/activity.module#ActivityPageModule' },
   { path: 'register', loadChildren: './create-profile/create-profile.module#CreateProfilePageModule'},
-  { path: 'create', loadChildren: './create-activity/create-activity.module#CreateActivityPageModule'},  { path: 'feed', loadChildren: './feed/feed.module#FeedPageModule' }
+  { path: 'create', loadChildren: './create-activity/create-activity.module#CreateActivityPageModule'},
+  { path: 'feed', loadChildren: './feed/feed.module#FeedPageModule' }
 
 ];
 

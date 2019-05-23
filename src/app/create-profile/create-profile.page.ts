@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-profile',
@@ -8,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-profile.page.scss'],
 })
 export class CreateProfilePage implements OnInit {
+
 
   email_input;
   firstname_input;
@@ -21,8 +24,10 @@ export class CreateProfilePage implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+
   ngOnInit() {
   }
+
 
   private register() {
     const user_data = {
@@ -43,5 +48,6 @@ export class CreateProfilePage implements OnInit {
           console.log('Error: ' + error.error['response']);
         });
   }
+
 
 }

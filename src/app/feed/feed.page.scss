@@ -38,31 +38,58 @@ ion-content {
         }
     }
     .row{
+        background-color: #449BB5;
         width: 100%;
         display: flex;
         justify-content: center;
         color: white;
+        padding-bottom: 10%;
         .feed {
-            width: 50%;
+            width: 60%;
             display: flex;
             justify-content: center;
+            flex-direction: column;
             .card {
                 width: 90%;
                 background-color: #68c39f;
                 margin-top: 50px;
                 border-radius: 50px;
+                justify-content: center;
+                padding-bottom: 5%;
                 h1 {
-                    margin-left: 45%;
+                    font-size: 3em;
+                    text-align: center;
+                }
+                h2 {
+                    width: 80%;
+                    margin: 0 auto;
+                }
+                hr {
+                    background-color: white;
+                    width: 90%;
+                    margin: 0 auto;
                 }
                 .content {
                     display: flex;
-                    flex-direction: row;
+                    flex-direction: column;
+                    .frame {
+                        margin: 0 auto;
+                        background-color: white;
+                        width: 20%;
+                        border-radius: 100%;
+                    }
                 }
-                .time {
+                .info {
                     display: flex;
-                    justify-content: space-between;
-                    h2 {
-
+                    justify-content: space-around;
+                    h3 {
+                        margin: 0;
+                        font-size: 1.3em;
+                    }
+                    h3 {
+                        margin: 0;
+                        float: right;
+                        right: 0;
                     }
                 }
             }

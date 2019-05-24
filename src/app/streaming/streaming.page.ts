@@ -18,7 +18,7 @@ export class StreamingPage implements OnInit {
     // const image = document.createElement("img");
     let eventChar = 0;
 
-    var ws = new WebSocket("ws://ip");
+    var ws = new WebSocket("ws://193.11.186.89:3000");
 
     var string = "";
     let imageA = document.getElementById("imageA") as HTMLImageElement;
@@ -104,7 +104,7 @@ export class StreamingPage implements OnInit {
     function webSocket(b64) {
       /*
 
-      We send base64 string to the websocket server. 
+      We send base64 string to the websocket server.
 
       */
 
@@ -118,8 +118,8 @@ export class StreamingPage implements OnInit {
       string = "";
 
 
-      /*  
-      Onmessage we get the message from the server and add it to a string. 
+      /*
+      Onmessage we get the message from the server and add it to a string.
       */
       let eventImageNumber;
       ws.onmessage = async function(event) {
